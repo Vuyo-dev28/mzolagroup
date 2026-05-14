@@ -44,6 +44,7 @@ export default function Navbar() {
                     <motion.img
                       src={HERO_WORK_IMAGE.src}
                       alt="Mzola Group"
+                      title={HERO_WORK_IMAGE.filename}
                       className="h-full w-full object-cover"
                       whileHover={{ scale: 1.08 }}
                       transition={{ type: 'spring', stiffness: 360, damping: 22 }}

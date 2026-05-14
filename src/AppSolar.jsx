@@ -5,7 +5,7 @@ import WorkImageStrip from './components/WorkImageStrip'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
 import { COMPANY } from './data/company'
-import { FALLBACK_WORK_IMAGE, HERO_WORK_IMAGE, WORK_GALLERY_IMAGES } from './data/workGallery'
+import { FALLBACK_WORK_IMAGE, HERO_WORK_IMAGE, SHOW_WORK_IMAGE_FILENAMES_IN_UI, WORK_GALLERY_IMAGES } from './data/workGallery'
 
 const serviceLines = [
   { title: 'Electrical', desc: 'Distribution, compliance, and dependable electrical installations.' },
@@ -136,6 +136,11 @@ function AppSolar() {
                   loading="eager"
                   onError={handleImageError}
                 />
+                {SHOW_WORK_IMAGE_FILENAMES_IN_UI ? (
+                  <p className="border-t border-white/10 bg-black/50 px-3 py-2 text-center font-mono text-[10px] tracking-wide text-[rgb(var(--muted))]">
+                    {HERO_WORK_IMAGE.filename}
+                  </p>
+                ) : null}
               </motion.div>
             </motion.div>
           </div>
@@ -143,7 +148,10 @@ function AppSolar() {
 
         <CompanyProfile />
 
-        <WorkImageStrip indices={[8, 9]} caption="Recent installations" />
+        <WorkImageStrip
+          files={['mzola-work-09.jpeg', 'mzola-work-10.jpeg']}
+          caption="Recent installations"
+        />
 
         <motion.section
           id="services"
@@ -225,7 +233,10 @@ function AppSolar() {
           </div>
         </motion.section>
 
-        <WorkImageStrip indices={[11, 12]} caption="On site with our teams" />
+        <WorkImageStrip
+          files={['mzola-work-12.jpeg', 'mzola-work-13.jpeg']}
+          caption="On site with our teams"
+        />
 
         <motion.section
           id="process"
@@ -262,7 +273,10 @@ function AppSolar() {
           </div>
         </motion.section>
 
-        <WorkImageStrip indices={[19, 20]} caption="Electrical & mechanical delivery" />
+        <WorkImageStrip
+          files={['mzola-work-20.jpeg', 'mzola-work-21.jpeg']}
+          caption="Electrical & mechanical delivery"
+        />
 
         <motion.section
           id="gallery"
@@ -292,9 +306,15 @@ function AppSolar() {
                     className="h-56 w-full object-cover transition duration-300 group-hover:opacity-95 opacity-100"
                     src={img.src}
                     alt={img.alt}
+                    title={SHOW_WORK_IMAGE_FILENAMES_IN_UI ? img.filename : undefined}
                     loading="lazy"
                     onError={handleImageError}
                   />
+                  {SHOW_WORK_IMAGE_FILENAMES_IN_UI ? (
+                    <p className="border-t border-white/10 bg-black/35 px-2 py-1.5 text-center font-mono text-[10px] tracking-wide text-[rgb(var(--muted))]">
+                      {img.filename}
+                    </p>
+                  ) : null}
                 </div>
               </motion.div>
             ))}
@@ -345,7 +365,10 @@ function AppSolar() {
           </div>
         </motion.section>
 
-        <WorkImageStrip indices={[26, 27]} caption="Quality workmanship" />
+        <WorkImageStrip
+          files={['mzola-work-27.jpeg', 'mzola-work-28.jpeg']}
+          caption="Quality workmanship"
+        />
 
         <motion.section
           id="faq"
@@ -394,7 +417,10 @@ function AppSolar() {
           </div>
         </motion.section>
 
-        <WorkImageStrip indices={[34, 35]} caption="Projects across Gauteng" />
+        <WorkImageStrip
+          files={['mzola-work-35.jpeg', 'mzola-work-36.jpeg']}
+          caption="Projects across Gauteng"
+        />
 
         <motion.section
           id="cta"

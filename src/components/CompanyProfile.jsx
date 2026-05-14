@@ -326,7 +326,10 @@ export default function CompanyProfile() {
           </div>
         </motion.article>
 
-        <WorkImageStrip indices={[4, 5]} caption="Real sites, real delivery" />
+        <WorkImageStrip
+          files={['mzola-work-39.jpeg', 'mzola-work-46.jpeg']}
+          caption="Real sites, real delivery"
+        />
 
         <motion.article
           id="competences"
