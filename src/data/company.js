@@ -1,5 +1,3 @@
-/** @typedef {{ year: string, contract: string, value: string, contact: string, status: string }} ProjectRow */
-
 export const COMPANY = {
   name: 'Mzola Group',
   legal: 'Mzola Group (Pty) Ltd',
@@ -16,51 +14,9 @@ export const COMPANY = {
   cellTel: '+27733479998',
   fax: '086 510 1006',
   email: 'mzolagroup@gmail.com',
-  vat: '4270294673',
-  ck: '2015/222305/07',
   directors: 'Mr V. Dube, Mr T. Mthombeni, Ms C. S. Dube',
   cidbGrades: ['1EB', '1EP'],
 }
-
-/** @type {ProjectRow[]} */
-export const RELATED_PROJECTS = [
-  { year: '2015', contract: "Mossel Bay, Mr Tladi's House", value: '45 000.00', contact: 'Dladla', status: 'Complete' },
-  { year: '2015', contract: "Ms X. Ngcobo's House, Jhb", value: '15 000.00', contact: 'Xolisa', status: 'Complete' },
-  { year: '2015', contract: 'City Power (Subcontracted)', value: 'As per job card', contact: 'Witness', status: 'Complete' },
-  { year: '2015', contract: 'Dladla Construction', value: '90 000.00', contact: 'Dladla', status: 'Complete' },
-  { year: '2017', contract: 'Sevunya Trading Enterprice Pty Ltd', value: '93 000.00', contact: 'Dumisani', status: 'Complete' },
-  { year: '2018', contract: 'Cassidy Solution', value: '10 000.00', contact: 'Bonginkosi', status: 'Complete' },
-  { year: '2019', contract: 'Day To Day Electrical', value: '28 000.00', contact: 'Ray', status: 'Complete' },
-  { year: '2019', contract: 'Rob Construction', value: '90 000.00', contact: 'Rob', status: 'Complete' },
-  { year: '2019', contract: "Jay's House", value: '35 000.00', contact: 'Jay', status: 'Complete' },
-  { year: '2019', contract: "Ola's House", value: '52 260.00', contact: 'Ola', status: 'Complete' },
-  { year: '2020', contract: 'Kobus Attorneys', value: '38 000.00', contact: 'Kobus', status: 'Complete' },
-  { year: '2020', contract: 'Rob Construction', value: '38 000.00', contact: 'Rob', status: 'Complete' },
-  { year: '2020', contract: 'Day to Day Electrical', value: '80 000.00', contact: 'Ray', status: 'Complete' },
-  { year: '2020', contract: 'Rob Construction', value: '35 000.00', contact: 'Rob', status: 'Complete' },
-  { year: '2021', contract: 'Beryl Holdings', value: '80 000.00', contact: 'Debra', status: 'Completed' },
-  { year: '2021', contract: 'Cank Projects', value: '65 000.00', contact: 'Roy', status: 'In progress' },
-  { year: '2021', contract: 'Mr Khan House', value: '18 000.00', contact: 'Munneb', status: 'Completed' },
-  {
-    year: '2022',
-    contract: 'Solar installations for various clients',
-    value: '—',
-    contact: 'Various',
-    status: 'Completed',
-  },
-  { year: '2022', contract: 'Alleyroads Construction', value: '150 000.00', contact: 'Bianca', status: 'Completed' },
-  { year: '2022', contract: 'Rob Construction', value: '49 000.00', contact: 'Rob', status: 'Completed' },
-  { year: '2022', contract: 'Kub Construction', value: '210 000.00', contact: 'Thabo', status: 'Completed' },
-  { year: '2023', contract: 'BMH Construction', value: '92 000.00', contact: 'Danie', status: 'In progress' },
-  {
-    year: '2023',
-    contract: 'Solar / backup installations for various clients',
-    value: '1 500 000.00',
-    contact: '—',
-    status: 'In progress',
-  },
-  { year: '2023', contract: 'Kub Construction', value: '84 000.00', contact: 'Thabo', status: 'Completed' },
-]
 
 export const ELECTRICAL_SPECIALISATIONS = [
   'Low voltage (LV), high voltage (HV) and underground reticulation',

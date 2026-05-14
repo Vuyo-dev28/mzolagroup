@@ -27,7 +27,6 @@ const Footer = () => {
             <p className="mt-3 text-sm text-[rgb(var(--muted))]">
               {COMPANY.tagline}. {COMPANY.location}.
             </p>
-            <p className="mt-2 text-xs text-[rgb(var(--muted))]">VAT {COMPANY.vat} · CK {COMPANY.ck}</p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -40,7 +39,6 @@ const Footer = () => {
               {[
                 { href: '#company-profile', label: 'Company profile' },
                 { href: '#about', label: 'About' },
-                { href: '#projects', label: 'Projects' },
                 { href: '#services', label: 'Services' },
                 { href: '#benefits', label: 'Why us' },
                 { href: '#process', label: 'Process' },

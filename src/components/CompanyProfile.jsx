@@ -1,10 +1,8 @@
-import { useMemo, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import {
   Award,
   Bolt,
   Building2,
-  ClipboardList,
   Cog,
   HeartHandshake,
   Mail,
@@ -14,11 +12,10 @@ import {
   Target,
   Users,
 } from 'lucide-react'
-import { COMPANY, RELATED_PROJECTS, ELECTRICAL_SPECIALISATIONS } from '../data/company'
+import { COMPANY, ELECTRICAL_SPECIALISATIONS } from '../data/company'
 import WorkImageStrip from './WorkImageStrip'
 
 const viewportOnce = { once: true, margin: '-70px' }
-const PROJECTS_PAGE_SIZE = 10
 
 function buildVariants(reduce) {
   const t = reduce ? { duration: 0 } : { duration: 0.55, ease: [0.22, 1, 0.36, 1] }
@@ -41,7 +38,6 @@ const jumpLinks = [
   { label: 'About', href: '#about' },
   { label: 'Mission & goals', href: '#mission' },
   { label: 'Capabilities', href: '#competences' },
-  { label: 'Projects', href: '#projects' },
   { label: 'Quality', href: '#quality' },
   { label: 'Safety', href: '#health-safety' },
   { label: 'Empowerment', href: '#empowerment' },
@@ -90,45 +86,9 @@ function CheckList({ items }) {
   )
 }
 
-function statusStyles(status) {
-  const s = status.toLowerCase()
-  if (s.includes('progress')) return 'border-amber-400/30 bg-amber-400/10 text-amber-100'
-  return 'border-emerald-400/25 bg-emerald-400/10 text-emerald-100'
-}
-
 export default function CompanyProfile() {
   const reduce = useReducedMotion()
   const { fadeInUp, stagger } = buildVariants(reduce)
-
-  const projectsSorted = useMemo(() => {
-    return [...RELATED_PROJECTS]
-      .map((row, index) => ({ row, index }))
-      .sort((a, b) => {
-        const yb = Number.parseInt(b.row.year, 10) || 0
-        const ya = Number.parseInt(a.row.year, 10) || 0
-        if (yb !== ya) return yb - ya
-        return a.index - b.index
-      })
-      .map(({ row, index }) => ({ ...row, _key: `proj-${index}` }))
-  }, [])
-
-  const [visibleProjectCount, setVisibleProjectCount] = useState(PROJECTS_PAGE_SIZE)
-  const visibleProjects = useMemo(
-    () => projectsSorted.slice(0, visibleProjectCount),
-    [projectsSorted, visibleProjectCount],
-  )
-  const totalProjects = projectsSorted.length
-  const hasMore = visibleProjectCount < totalProjects
-  const canShowLess = visibleProjectCount > PROJECTS_PAGE_SIZE
-  const remaining = totalProjects - visibleProjectCount
-
-  const handleViewMoreProjects = () => {
-    setVisibleProjectCount((n) => Math.min(n + PROJECTS_PAGE_SIZE, totalProjects))
-  }
-
-  const handleShowLessProjects = () => {
-    setVisibleProjectCount(PROJECTS_PAGE_SIZE)
-  }
 
   const strategyItems = [
     'Provide appropriate services and solutions that are delivered as requested with correct pricing and quality.',
@@ -205,16 +165,6 @@ export default function CompanyProfile() {
                 Email
               </a>
             </div>
-            <dl className="mt-8 flex flex-wrap gap-3">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--muted))]">VAT</dt>
-                <dd className="mt-1 font-mono text-sm text-[rgb(var(--fg))]">{COMPANY.vat}</dd>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--muted))]">CK</dt>
-                <dd className="mt-1 font-mono text-sm text-[rgb(var(--fg))]">{COMPANY.ck}</dd>
-              </div>
-            </dl>
           </motion.div>
 
           <motion.div variants={fadeInUp} className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
@@ -311,32 +261,6 @@ export default function CompanyProfile() {
                 {tag}
               </motion.span>
             ))}
-          </div>
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
-            <motion.div variants={fadeInUp}>
-              <IconCard icon={Bolt} title="Mr Vincent Dube">
-                <p>
-                  Qualified in electrical engineering. Experience includes Hwange Power Station, Powerman Electrical and
-                  Fastmove Electrical cc — building a career of more than 20 years in the trade.
-                </p>
-              </IconCard>
-            </motion.div>
-            <motion.div variants={fadeInUp}>
-              <IconCard icon={Cog} title="Mr Thabiso Mthombeni">
-                <p>
-                  Trainee mechanical engineer with UNISA, also studying project management — bringing structured delivery
-                  to mechanical and HVAC scope.
-                </p>
-              </IconCard>
-            </motion.div>
-            <motion.div variants={fadeInUp}>
-              <IconCard icon={ClipboardList} title="Miss Caroline S. Dube">
-                <p>
-                  Business studies after five years as site administrator at Idube Construction Projects, which
-                  specialises in civils — strong coordination DNA across disciplines.
-                </p>
-              </IconCard>
-            </motion.div>
           </div>
         </motion.article>
 
@@ -550,120 +474,6 @@ export default function CompanyProfile() {
         </motion.article>
 
         <motion.article
-          id="projects"
-          className="mt-20 scroll-mt-32 border-t border-white/10 pt-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          variants={stagger}
-        >
-          <motion.div variants={fadeInUp}>
-            <SectionHeading
-              eyebrow="Track record"
-              title="Selected electrical, mechanical & building projects"
-              description="Representative work across residential, commercial subcontracting and larger construction partners. Values shown in South African Rand (R) as provided for each engagement. Newest projects are listed first."
-            />
-          </motion.div>
-
-          <div className="mt-8 space-y-3 md:hidden">
-            {visibleProjects.map((row) => (
-              <motion.div
-                key={row._key}
-                variants={fadeInUp}
-                className="cool-card glass rounded-2xl border border-white/10 p-4 backdrop-blur-md"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <span className="rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-1 text-[11px] font-bold text-[rgb(var(--fg))]">
-                    {row.year}
-                  </span>
-                  <span
-                    className={`shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide ${statusStyles(row.status)}`}
-                  >
-                    {row.status}
-                  </span>
-                </div>
-                <p className="mt-3 text-sm font-semibold text-[rgb(var(--fg))]">{row.contract}</p>
-                <dl className="mt-3 grid grid-cols-2 gap-3 text-xs text-[rgb(var(--muted))]">
-                  <div>
-                    <dt className="font-bold uppercase tracking-wider text-[rgb(var(--muted))]">Value (R)</dt>
-                    <dd className="mt-1 font-mono text-[rgb(var(--fg))]">{row.value}</dd>
-                  </div>
-                  <div>
-                    <dt className="font-bold uppercase tracking-wider text-[rgb(var(--muted))]">Contact</dt>
-                    <dd className="mt-1 text-[rgb(var(--fg))]">{row.contact}</dd>
-                  </div>
-                </dl>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div variants={fadeInUp} className="mt-2 hidden md:block">
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] shadow-[0_24px_80px_-48px_rgba(0,0,0,0.9)]">
-              <div className="overflow-x-auto">
-                <table className="min-w-[720px] w-full border-separate border-spacing-0 text-left text-sm">
-                  <thead>
-                    <tr className="bg-white/[0.06] text-[rgb(var(--fg))]">
-                      <th className="px-4 py-3 text-xs font-bold uppercase tracking-wider">Year</th>
-                      <th className="px-4 py-3 text-xs font-bold uppercase tracking-wider">Contract</th>
-                      <th className="px-4 py-3 text-xs font-bold uppercase tracking-wider">Value (R)</th>
-                      <th className="px-4 py-3 text-xs font-bold uppercase tracking-wider">Contact</th>
-                      <th className="px-4 py-3 text-xs font-bold uppercase tracking-wider">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {visibleProjects.map((row) => (
-                      <tr
-                        key={row._key}
-                        className="border-t border-white/5 text-[rgb(var(--muted))] transition-colors hover:bg-white/[0.04]"
-                      >
-                        <td className="whitespace-nowrap px-4 py-3 align-middle font-semibold text-[rgb(var(--fg))]">
-                          {row.year}
-                        </td>
-                        <td className="px-4 py-3 align-middle">{row.contract}</td>
-                        <td className="whitespace-nowrap px-4 py-3 align-middle font-mono text-sm">{row.value}</td>
-                        <td className="px-4 py-3 align-middle">{row.contact}</td>
-                        <td className="whitespace-nowrap px-4 py-3 align-middle">
-                          <span
-                            className={`inline-flex rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide ${statusStyles(row.status)}`}
-                          >
-                            {row.status}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </motion.div>
-
-          {(hasMore || canShowLess) && (
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              {hasMore && (
-                <button
-                  type="button"
-                  onClick={handleViewMoreProjects}
-                  className="rounded-full border border-white/15 bg-white/[0.08] px-6 py-2.5 text-sm font-semibold text-[rgb(var(--fg))] transition-colors hover:border-white/25 hover:bg-white/[0.12]"
-                >
-                  View more ({remaining === 1 ? '1 more' : `${remaining} more`})
-                </button>
-              )}
-              {canShowLess && (
-                <button
-                  type="button"
-                  onClick={handleShowLessProjects}
-                  className="rounded-full border border-white/10 bg-transparent px-6 py-2.5 text-sm font-semibold text-[rgb(var(--muted))] transition-colors hover:border-white/20 hover:text-[rgb(var(--fg))]"
-                >
-                  Show less
-                </button>
-              )}
-            </div>
-          )}
-        </motion.article>
-
-        <WorkImageStrip indices={[13, 14]} caption="Track record in pictures" />
-
-        <motion.article
           id="quality"
           className="mt-20 scroll-mt-32 border-t border-white/10 pt-16"
           initial="hidden"
@@ -762,8 +572,6 @@ export default function CompanyProfile() {
           >
             {[
               { label: 'Registered name', value: COMPANY.registeredLegalName },
-              { label: 'Registration number (CK)', value: COMPANY.ck },
-              { label: 'VAT number', value: COMPANY.vat },
               { label: 'Postal address', value: COMPANY.postalLines.join(', ') },
               { label: 'Physical address', value: COMPANY.physicalLines.join(', ') },
               { label: 'Telephone', value: COMPANY.phoneDisplay, href: `tel:${COMPANY.phoneTel}` },
