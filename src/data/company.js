@@ -14,7 +14,7 @@ export const COMPANY = {
   cellTel: '+27733479998',
   fax: '086 510 1006',
   email: 'mzolagroup@gmail.com',
-  directors: 'Mr V. Dube, Mr T. Mthombeni, Ms C. S. Dube',
+  directors: 'Mr V. Dube',
   cidbGrades: ['1EB', '1EP'],
 }
 
