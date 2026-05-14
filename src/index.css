@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Serif:ital,wght@0,500;0,600;0,700;1,500&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bg: 15 23 42;
+  --fg: 255 255 255;
+  --muted: 148 163 184;
+  --stroke: 255 255 255;
+  --brand: 245 158 11;
+  --brand2: 217 119 6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings & display — corporate serif */
+.font-display {
+  font-family: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Flat page backdrop (no animated colour washes) */
+.glow-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: rgb(15 23 42);
+}
+
+.hero-glow {
+  display: none;
+}
+
+.glass {
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.text-glow {
+  text-shadow: none;
+}
+
+::selection {
+  background: rgba(var(--brand), 0.2);
+}
+
+/* Cards: no gradient borders, no shimmer, minimal lift */
+.cool-card {
+  position: relative;
+  isolation: isolate;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.cool-card::before,
+.cool-card::after {
+  content: none;
+  display: none;
+}
+
+.cool-card:hover {
+  transform: none;
+}
+
+.cool-card-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.cool-card-shimmer::after {
+  content: none;
+  display: none;
+}
+
+.cool-card-accent {
+  height: 3px;
+  width: 2.5rem;
+  border-radius: 999px;
+  background: rgb(var(--brand));
+  opacity: 1;
+}
+
+/* Subtle grid, static */
+.page-grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 85% 55% at 50% 0%, black, transparent);
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-bg,
+  .page-grid-bg {
+    animation: none !important;
+  }
+
+  .cool-card {
+    transition: none;
+  }
+}
