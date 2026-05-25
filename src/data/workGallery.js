@@ -4,7 +4,7 @@
  */
 
 /** Set to false when you no longer want filenames visible under strips / hero / gallery. */
-export const SHOW_WORK_IMAGE_FILENAMES_IN_UI = true
+export const SHOW_WORK_IMAGE_FILENAMES_IN_UI = false
 
 /** Hero + navbar thumbnail — change this string to swap which file is used (must match a real filename). */
 export const HERO_WORK_IMAGE_FILENAME = 'mzola-work-11.jpeg'
@@ -50,3 +50,27 @@ export function workGalleryEntryByFilename(filename) {
 
 export const HERO_WORK_IMAGE = workGalleryEntryByFilename(HERO_WORK_IMAGE_FILENAME) ?? WORK_GALLERY_IMAGES[0]
 export const FALLBACK_WORK_IMAGE = WORK_GALLERY_IMAGES[0]
+
+// Recent Projects gallery configuration
+export const RECENT_PROJECTS_BASE = '/images/recentprojects'
+export const RECENT_PROJECTS_FILES = [
+  'image.png',
+  'image copy.png',
+  'image copy 2.png',
+  'image copy 3.png',
+  'image copy 4.png',
+  'image copy 5.png',
+  'image copy 6.png',
+  'image copy 7.png',
+  'image copy 8.png',
+  'image copy 9.png',
+  'image copy 10.png',
+  'image copy 11.png',
+]
+
+/** @type {{ src: string, alt: string, filename: string }[]} */
+export const RECENT_PROJECTS_IMAGES = RECENT_PROJECTS_FILES.map((filename, i) => ({
+  src: `${RECENT_PROJECTS_BASE}/${filename}`,
+  alt: `${ALT_ROTATION[i % ALT_ROTATION.length]} (recent project photo ${i + 1}).`,
+  filename,
+}))

@@ -19,27 +19,29 @@ function handleImgError(event) {
 
 /**
  * `files` — basenames only, e.g. ['mzola-work-09.jpeg', 'mzola-work-10.jpeg'] (easiest to reorder).
- * `indices` — 0-based into WORK_GALLERY_IMAGES; use `files` when you care which disk file is shown.
- * @param {{ caption?: string, files?: string[], indices?: number[], showFilenames?: boolean }} props
+ * `indices` — 0-based into gallery (default WORK_GALLERY_IMAGES); use `files` when you care which disk file is shown.
+ * `gallery` — optional custom image gallery array (defaults to WORK_GALLERY_IMAGES).
+ * @param {{ caption?: string, files?: string[], indices?: number[], showFilenames?: boolean, gallery?: any[] }} props
  */
 export default function WorkImageStrip({
   caption = 'Our work on site',
   files,
   indices,
   showFilenames = SHOW_WORK_IMAGE_FILENAMES_IN_UI,
+  gallery = WORK_GALLERY_IMAGES,
 }) {
   const reduce = useReducedMotion()
 
   const shots = []
   if (files?.length) {
     for (const f of files) {
-      const entry = workGalleryEntryByFilename(f)
+      const entry = gallery.find((img) => img.filename.toLowerCase() === f.toLowerCase())
       if (entry) shots.push(entry)
     }
   } else if (indices?.length) {
     for (const i of indices) {
-      if (!Number.isInteger(i) || i < 0 || i >= WORK_IMAGE_COUNT) continue
-      const entry = WORK_GALLERY_IMAGES[i]
+      if (!Number.isInteger(i) || i < 0 || i >= gallery.length) continue
+      const entry = gallery[i]
       if (entry) shots.push(entry)
     }
   }

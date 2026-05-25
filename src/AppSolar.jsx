@@ -5,7 +5,7 @@ import WorkImageStrip from './components/WorkImageStrip'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
 import { COMPANY } from './data/company'
-import { FALLBACK_WORK_IMAGE, HERO_WORK_IMAGE, SHOW_WORK_IMAGE_FILENAMES_IN_UI, WORK_GALLERY_IMAGES } from './data/workGallery'
+import { FALLBACK_WORK_IMAGE, HERO_WORK_IMAGE, SHOW_WORK_IMAGE_FILENAMES_IN_UI, WORK_GALLERY_IMAGES, RECENT_PROJECTS_IMAGES } from './data/workGallery'
 
 const serviceLines = [
   { title: 'Electrical', desc: 'Distribution, compliance, and dependable electrical installations.' },
@@ -149,8 +149,9 @@ function AppSolar() {
         <CompanyProfile />
 
         <WorkImageStrip
-          files={['mzola-work-09.jpeg', 'mzola-work-10.jpeg']}
+          indices={[0, 1]}
           caption="Recent installations"
+          gallery={RECENT_PROJECTS_IMAGES}
         />
 
         <motion.section
